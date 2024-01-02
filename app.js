@@ -19,10 +19,10 @@ db.on('error', (err) => {
 });
 
 db.once('open', () => {
-  console.log('Connected to MongoDB');
+  console.log('Connected to MongoDB!');
 });
 
-// Middleware
+/// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({ secret: process.env.SESSION_SECRET, resave: false, saveUninitialized: false }));
@@ -35,6 +35,9 @@ require('./config/passport')(passport, User); // Pass the User model
 // Set up routes
 const authRoutes = require('./routes/authRoutes');
 app.use('/auth', authRoutes);
+
+const memoryRoutes = require('./routes/memoryRoutes');
+app.use('/memories', memoryRoutes); // Use a different path for memory routes
 
 // Start the server
 const PORT = process.env.PORT || 3000;
