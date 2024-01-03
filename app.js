@@ -39,6 +39,10 @@ app.use('/auth', authRoutes);
 const memoryRoutes = require('./routes/memoryRoutes');
 app.use('/memories', memoryRoutes); // Use a different path for memory routes
 
+const initializePassport = require('./config/passport');
+initializePassport(passport);
+
+
 // Start the server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
